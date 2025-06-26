@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
@@ -205,7 +206,7 @@ const Projects = () => {
                 className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>{t.back_home}</span>
+                <span>{t.nav_home}</span>
               </Link>
 
               <DropdownMenu>
