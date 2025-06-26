@@ -1,11 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Code, Smartphone, Zap, Bot, Mail, Phone, MapPin } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Code, Smartphone, Zap, Bot, Mail, Phone, MapPin, Globe, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const translations = {
   en: {
@@ -61,11 +66,44 @@ const translations = {
     contact_submit: "Отправить сообщение",
     contact_success: "Сообщение успешно отправлено!",
     footer_rights: "Все права защищены."
+  },
+  ar: {
+    nav_projects: "المشاريع",
+    nav_services: "الخدمات والأسعار",
+    nav_contact: "اتصل بنا",
+    hero_title_1: "نحن نبني الحلول التقنية التي تدفع عملك إلى الأمام",
+    hero_cta_1: "ابدأ الآن",
+    hero_title_2: "لماذا تختارنا؟",
+    hero_point_1: "⚡ التسليم السريع",
+    hero_point_2: "💰 أسعار شفافة",
+    hero_point_3: "🔧 حلول مخصصة",
+    services_title: "خدماتنا",
+    service_mobile: "تطوير التطبيقات المحمولة",
+    service_mobile_desc: "تطبيقات iOS و Android الأصلية مع واجهة مستخدم حديثة",
+    service_web: "تطوير الويب",
+    service_web_desc: "تطبيقات ويب متكاملة مع React و Node.js",
+    service_mvp: "MVP بسعر ثابت",
+    service_mvp_desc: "نماذج أولية سريعة مع جدول زمني مضمون للتسليم",
+    service_ai: "خدمة وكيل الذكاء الاصطناعي",
+    service_ai_desc: "حلول الذكاء الاصطناعي المخصصة وتكامل الشات بوت",
+    contact_title: "اتصل بنا",
+    contact_name: "الاسم",
+    contact_email: "البريد الإلكتروني",
+    contact_request: "أخبرنا عن مشروعك",
+    contact_submit: "إرسال الرسالة",
+    contact_success: "تم إرسال الرسالة بنجاح!",
+    footer_rights: "جميع الحقوق محفوظة."
   }
 };
 
+const languageOptions = [
+  { code: 'en', label: 'EN', flag: '🇺🇸' },
+  { code: 'ru', label: 'RU', flag: '🇷🇺' },
+  { code: 'ar', label: 'AR', flag: '🇸🇦' }
+];
+
 const Index = () => {
-  const [language, setLanguage] = useState<'en' | 'ru'>('en');
+  const [language, setLanguage] = useState<'en' | 'ru' | 'ar'>('en');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', request: '' });
   const { toast } = useToast();
@@ -116,8 +154,12 @@ const Index = () => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const getCurrentLanguageOption = () => {
+    return languageOptions.find(option => option.code === language) || languageOptions[0];
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-slate-700">
         <div className="container mx-auto px-6 py-4">
@@ -145,20 +187,23 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-3 py-1 rounded ${language === 'en' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'}`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLanguage('ru')}
-                className={`px-3 py-1 rounded ${language === 'ru' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'}`}
-              >
-                RU
-              </button>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors">
+                <Globe className="w-5 h-5 text-white" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50">
+                {languageOptions.map((option) => (
+                  <DropdownMenuItem
+                    key={option.code}
+                    onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
+                    className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-2"
+                  >
+                    <span className="text-lg">{option.flag}</span>
+                    <span>{option.label}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </nav>
