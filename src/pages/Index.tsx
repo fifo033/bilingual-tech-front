@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Code, Smartphone, Zap, Bot, Mail, Phone, MapPin, Globe, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -97,9 +98,24 @@ const translations = {
 };
 
 const languageOptions = [
-  { code: 'en', label: 'English', flag: '🇬🇧', display: 'EN' },
-  { code: 'ru', label: 'Русский', flag: '🇷🇺', display: 'RU' },
-  { code: 'ar', label: 'العربية', flag: '🇸🇦', display: 'AR' }
+  { 
+    code: 'en', 
+    label: 'English', 
+    flag: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=32&h=24&fit=crop&crop=center', 
+    display: 'EN' 
+  },
+  { 
+    code: 'ru', 
+    label: 'Русский', 
+    flag: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=32&h=24&fit=crop&crop=center', 
+    display: 'RU' 
+  },
+  { 
+    code: 'ar', 
+    label: 'العربية', 
+    flag: 'https://images.unsplash.com/photo-1466442929976-97f336a657be?w=32&h=24&fit=crop&crop=center', 
+    display: 'AR' 
+  }
 ];
 
 const Index = () => {
@@ -189,7 +205,11 @@ const Index = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center justify-center space-x-2 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors focus:outline-none text-white">
-                <span className="text-lg font-bold">{getCurrentLanguageOption().flag}</span>
+                <img 
+                  src={getCurrentLanguageOption().flag} 
+                  alt={getCurrentLanguageOption().label}
+                  className="w-6 h-4 object-cover rounded-sm"
+                />
                 <span className="text-sm font-medium">{getCurrentLanguageOption().display}</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50 min-w-[140px]" align="end">
@@ -199,7 +219,11 @@ const Index = () => {
                     onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
                     className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-3 px-3 py-2"
                   >
-                    <span className="text-lg font-bold">{option.flag}</span>
+                    <img 
+                      src={option.flag} 
+                      alt={option.label}
+                      className="w-6 h-4 object-cover rounded-sm"
+                    />
                     <span className="text-sm font-medium">{option.label}</span>
                   </DropdownMenuItem>
                 ))}
