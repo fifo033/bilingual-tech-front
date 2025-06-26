@@ -98,19 +98,19 @@ const languageOptions = [
   { 
     code: 'en', 
     label: 'English', 
-    flag: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=32&h=24&fit=crop&crop=center', 
+    flag: '/lovable-uploads/d2e3f15f-e809-4199-ab6b-aacadc0434ff.png', 
     display: 'EN' 
   },
   { 
     code: 'ru', 
     label: 'Русский', 
-    flag: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=32&h=24&fit=crop&crop=center', 
+    flag: '/lovable-uploads/8fa7e58e-7425-4377-8d4a-c02fd3f6e53d.png', 
     display: 'RU' 
   },
   { 
     code: 'ar', 
     label: 'العربية', 
-    flag: 'https://images.unsplash.com/photo-1466442929976-97f336a657be?w=32&h=24&fit=crop&crop=center', 
+    flag: '/lovable-uploads/d0166951-8e51-43ac-8a05-e9eaeb745235.png', 
     display: 'AR' 
   }
 ];
