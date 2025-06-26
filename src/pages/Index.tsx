@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Code, Smartphone, Zap, Bot, Mail, Phone, MapPin, Globe, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -98,9 +97,9 @@ const translations = {
 };
 
 const languageOptions = [
-  { code: 'en', label: 'English', flag: '🇬🇧' },
-  { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-  { code: 'ar', label: 'العربية', flag: '🇸🇦' }
+  { code: 'en', label: 'English', flag: '🇬🇧', display: 'EN' },
+  { code: 'ru', label: 'Русский', flag: '🇷🇺', display: 'RU' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦', display: 'AR' }
 ];
 
 const Index = () => {
@@ -189,19 +188,18 @@ const Index = () => {
             </div>
 
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors focus:outline-none">
-                <div className="flex items-center justify-center">
-                  <span className="text-2xl">{getCurrentLanguageOption().flag}</span>
-                </div>
+              <DropdownMenuTrigger className="flex items-center justify-center space-x-2 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors focus:outline-none text-white">
+                <span className="text-lg font-bold">{getCurrentLanguageOption().flag}</span>
+                <span className="text-sm font-medium">{getCurrentLanguageOption().display}</span>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50 min-w-[120px]" align="end">
+              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50 min-w-[140px]" align="end">
                 {languageOptions.map((option) => (
                   <DropdownMenuItem
                     key={option.code}
                     onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
                     className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-3 px-3 py-2"
                   >
-                    <span className="text-xl">{option.flag}</span>
+                    <span className="text-lg font-bold">{option.flag}</span>
                     <span className="text-sm font-medium">{option.label}</span>
                   </DropdownMenuItem>
                 ))}
