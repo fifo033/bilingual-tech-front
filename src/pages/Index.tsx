@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Code, Smartphone, Zap, Bot, Mail, Phone, MapPin, Globe, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -97,9 +98,9 @@ const translations = {
 };
 
 const languageOptions = [
-  { code: 'en', label: 'EN', flag: '🇺🇸' },
-  { code: 'ru', label: 'RU', flag: '🇷🇺' },
-  { code: 'ar', label: 'AR', flag: '🇸🇦' }
+  { code: 'en', label: 'English', flag: '🇬🇧' },
+  { code: 'ru', label: 'Русский', flag: '🇷🇺' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦' }
 ];
 
 const Index = () => {
@@ -188,18 +189,20 @@ const Index = () => {
             </div>
 
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors">
-                <Globe className="w-5 h-5 text-white" />
+              <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors focus:outline-none">
+                <div className="flex items-center justify-center">
+                  <span className="text-2xl">{getCurrentLanguageOption().flag}</span>
+                </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50">
+              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50 min-w-[120px]" align="end">
                 {languageOptions.map((option) => (
                   <DropdownMenuItem
                     key={option.code}
                     onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
-                    className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-2"
+                    className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-3 px-3 py-2"
                   >
-                    <span className="text-lg">{option.flag}</span>
-                    <span>{option.label}</span>
+                    <span className="text-xl">{option.flag}</span>
+                    <span className="text-sm font-medium">{option.label}</span>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>

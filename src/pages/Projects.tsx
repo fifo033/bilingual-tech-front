@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Globe } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -94,9 +94,9 @@ const translations = {
 };
 
 const languageOptions = [
-  { code: 'en', label: 'EN', flag: '🇺🇸' },
-  { code: 'ru', label: 'RU', flag: '🇷🇺' },
-  { code: 'ar', label: 'AR', flag: '🇸🇦' }
+  { code: 'en', label: 'English', flag: '🇬🇧' },
+  { code: 'ru', label: 'Русский', flag: '🇷🇺' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦' }
 ];
 
 const Projects = () => {
@@ -185,52 +185,49 @@ const Projects = () => {
     }
   };
 
+  const getCurrentLanguageOption = () => {
+    return languageOptions.find(option => option.code === language) || languageOptions[0];
+  };
+
   return (
     <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-slate-700">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-white">TechSolutions</div>
+            <Link to="/" className="text-2xl font-bold text-white hover:text-blue-400 transition-colors">
+              TechSolutions
+            </Link>
             
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-4">
               <Link 
                 to="/" 
-                className="text-gray-300 hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
               >
-                {t.nav_home}
+                <ArrowLeft className="w-4 h-4" />
+                <span>{t.back_home}</span>
               </Link>
-              <Link 
-                to="/#services" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t.nav_services}
-              </Link>
-              <Link 
-                to="/#contact" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t.nav_contact}
-              </Link>
-            </div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors">
-                <Globe className="w-5 h-5 text-white" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50">
-                {languageOptions.map((option) => (
-                  <DropdownMenuItem
-                    key={option.code}
-                    onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
-                    className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-2"
-                  >
-                    <span className="text-lg">{option.flag}</span>
-                    <span>{option.label}</span>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors focus:outline-none">
+                  <div className="flex items-center justify-center">
+                    <span className="text-2xl">{getCurrentLanguageOption().flag}</span>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-slate-800 border-slate-700 z-50 min-w-[120px]" align="end">
+                  {languageOptions.map((option) => (
+                    <DropdownMenuItem
+                      key={option.code}
+                      onClick={() => setLanguage(option.code as 'en' | 'ru' | 'ar')}
+                      className="text-white hover:bg-slate-700 cursor-pointer flex items-center space-x-3 px-3 py-2"
+                    >
+                      <span className="text-xl">{option.flag}</span>
+                      <span className="text-sm font-medium">{option.label}</span>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </div>
       </nav>
